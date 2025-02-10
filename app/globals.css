@@ -10,4 +10,8 @@
   body {
     @apply bg-white text-gray-950 min-h-screen;
   }
+  :root {
+
+    --radius: 0.5rem
+  }
 }
