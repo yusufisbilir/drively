@@ -1,0 +1,9 @@
+{
+  "prettier.configPath": "/Users/yusufisbilir/Coding/drively/.prettierrc",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.options": {
+    "configFile": "/Users/yusufisbilir/Coding/drively/.eslintrc"
+  }
+}
