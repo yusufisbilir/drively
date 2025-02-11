@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import Link from 'next/link';
 
 type AuthFormType = 'sign-in' | 'sign-up';
 
@@ -22,6 +24,9 @@ type Props = {
 };
 
 const AuthForm = ({ type }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const authFormSchema = (formType: AuthFormType) => {
     return z.object({
       email: z.string().email(),
@@ -39,12 +44,24 @@ const AuthForm = ({ type }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    setLoading(true);
+    setErrorMessage(null);
+    try {
+      // Simulate an async operation
+      await new Promise((resolve, reject) =>
+        setTimeout(() => reject(new Error('Submission failed')), 2000)
+      );
+    } catch (error) {
+      setErrorMessage('Submission failed');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <h1>{type === 'sign-up' ? 'Sign Up' : 'Sign In'}</h1>
         <FormField
           control={form.control}
           name="email"
@@ -75,7 +92,16 @@ const AuthForm = ({ type }: Props) => {
             )}
           />
         )}
-        <Button type="submit">Submit</Button>
+        <div className="flex items-center gap-2">
+          <p>{type === 'sign-in' ? "Don't have an account?" : 'Already have an account?'}</p>
+          <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'}>
+            {type === 'sign-in' ? 'Sign Up' : 'Sign In'}
+          </Link>
+        </div>
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+        <Button type="submit" disabled={loading}>
+          {loading ? 'Submitting...' : 'Submit'}
+        </Button>
       </form>
     </Form>
   );
