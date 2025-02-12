@@ -10,7 +10,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { verifySecret } from '@/lib/actions/user.actions';
 import { useRouter } from 'next/navigation';
