@@ -28,7 +28,7 @@ type Props = {
 const AuthForm = ({ type }: Props) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [accountId, setAccountId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const authFormSchema = (formType: AuthFormType) => {
     return z.object({
@@ -58,7 +58,7 @@ const AuthForm = ({ type }: Props) => {
             })
           : await signInUser({ email: values.email });
 
-      setAccountId(user.accountId);
+      setUserId(user.id);
     } catch (error) {
       setErrorMessage('Submission failed');
     } finally {
@@ -113,7 +113,7 @@ const AuthForm = ({ type }: Props) => {
           </Button>
         </form>
       </Form>
-      {accountId && <OTPModal email={form.getValues('email')} accountId={accountId} />}
+      {userId && <OTPModal email={form.getValues('email')} userId={userId} />}
     </>
   );
 };
