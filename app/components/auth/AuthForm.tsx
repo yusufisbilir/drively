@@ -16,6 +16,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import Link from 'next/link';
+import { createAccount, signInUser } from '@/lib/actions/user.actions';
+import OTPModal from './OTPModal';
 
 type AuthFormType = 'sign-in' | 'sign-up';
 
@@ -26,6 +28,7 @@ type Props = {
 const AuthForm = ({ type }: Props) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [accountId, setAccountId] = useState(null);
 
   const authFormSchema = (formType: AuthFormType) => {
     return z.object({
@@ -47,10 +50,15 @@ const AuthForm = ({ type }: Props) => {
     setLoading(true);
     setErrorMessage(null);
     try {
-      // Simulate an async operation
-      await new Promise((resolve, reject) =>
-        setTimeout(() => reject(new Error('Submission failed')), 2000)
-      );
+      const user =
+        type === 'sign-up'
+          ? await createAccount({
+              fullName: values.fullName || '',
+              email: values.email,
+            })
+          : await signInUser({ email: values.email });
+
+      setAccountId(user.accountId);
     } catch (error) {
       setErrorMessage('Submission failed');
     } finally {
@@ -59,51 +67,54 @@ const AuthForm = ({ type }: Props) => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <h1>{type === 'sign-up' ? 'Sign Up' : 'Sign In'}</h1>
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="example@example.com" {...field} />
-              </FormControl>
-              <FormDescription>We'll never share your email with anyone else.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {type === 'sign-up' && (
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <h1>{type === 'sign-up' ? 'Sign Up' : 'Sign In'}</h1>
           <FormField
             control={form.control}
-            name="fullName"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="example@example.com" {...field} />
                 </FormControl>
-                <FormDescription>Please enter your full name.</FormDescription>
+                <FormDescription>We'll never share your email with anyone else.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-        )}
-        <div className="flex items-center gap-2">
-          <p>{type === 'sign-in' ? "Don't have an account?" : 'Already have an account?'}</p>
-          <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'}>
-            {type === 'sign-in' ? 'Sign Up' : 'Sign In'}
-          </Link>
-        </div>
-        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
-        <Button type="submit" disabled={loading}>
-          {loading ? 'Submitting...' : 'Submit'}
-        </Button>
-      </form>
-    </Form>
+          {type === 'sign-up' && (
+            <FormField
+              control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Doe" {...field} />
+                  </FormControl>
+                  <FormDescription>Please enter your full name.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+          <div className="flex items-center gap-2">
+            <p>{type === 'sign-in' ? "Don't have an account?" : 'Already have an account?'}</p>
+            <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'}>
+              {type === 'sign-in' ? 'Sign Up' : 'Sign In'}
+            </Link>
+          </div>
+          {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Submitting...' : 'Submit'}
+          </Button>
+        </form>
+      </Form>
+      {accountId && <OTPModal email={form.getValues('email')} accountId={accountId} />}
+    </>
   );
 };
 
