@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { verifySecret } from '@/lib/actions/user.actions';
 import { useRouter } from 'next/navigation';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 
 const OTPModal = ({ email, userId }: { email: string; userId: string }) => {
   const [otp, setOtp] = useState('');
@@ -53,12 +54,18 @@ const OTPModal = ({ email, userId }: { email: string; userId: string }) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         {error && <div className="text-red-500">{error}</div>}
-        <Input
-          type="text"
-          placeholder="Enter OTP"
-          value={otp}
-          onChange={(e) => setOtp(e.target.value)}
-        />
+        <div className="flex justify-center">
+          <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+            <InputOTPGroup className="shad-otp">
+              <InputOTPSlot index={0} className="shad-otp-slot" />
+              <InputOTPSlot index={1} className="shad-otp-slot" />
+              <InputOTPSlot index={2} className="shad-otp-slot" />
+              <InputOTPSlot index={3} className="shad-otp-slot" />
+              <InputOTPSlot index={4} className="shad-otp-slot" />
+              <InputOTPSlot index={5} className="shad-otp-slot" />
+            </InputOTPGroup>
+          </InputOTP>
+        </div>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction disabled={loading} onClick={handleSubmit}>
