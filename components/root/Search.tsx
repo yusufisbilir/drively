@@ -10,11 +10,9 @@ const Search = () => {
 
   return (
     <div className="relative w-full md:max-w-[480px]">
-      <div
-        className={`flex flex-1 items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-1 transition-all duration-300 ${isFocused ? 'border-neutral-400 shadow-sm' : 'hover:border-neutral-300'}`}
-      >
+      <div className="flex flex-1 items-center gap-3 px-2">
         <SearchIcon
-          className={`h-5 w-5 transition-colors ${isFocused ? 'text-neutral-700' : 'text-neutral-400'}`}
+          className={`h-5 w-5 transition-colors ${isFocused ? 'text-blue-600' : 'text-neutral-400'}`}
         />
         <Input
           value={query}

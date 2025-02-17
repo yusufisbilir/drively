@@ -6,19 +6,23 @@ import FileUploader from './FileUploder';
 
 const Header = () => {
   return (
-    <header className="hidden items-center justify-between gap-5 px-5 py-2 sm:flex">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-5 border-b border-neutral-200 bg-white px-5">
       <Search />
       <div className="flex items-center justify-center min-w-fit gap-4">
         <FileUploader />
         <form
           action={async () => {
             'use server';
-
             await signOutUser();
           }}
         >
-          <Button type="submit" className="bg-white shadow-none hover:bg-neutral-100 px-2">
-            <LogOut className="w-6 h-6 text-red-500" />
+          <Button
+            type="submit"
+            variant="ghost"
+            size="icon"
+            className="text-neutral-400 hover:text-red-500 hover:bg-transparent"
+          >
+            <LogOut className="h-5 w-5" />
           </Button>
         </form>
       </div>
