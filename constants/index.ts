@@ -1,5 +1,5 @@
 export const avatarPlaceholder =
-  'https://cdn-icons-png.freepik.com/256/4004/4004610.png?ga=GA1.1.463118338.1739298702';
+  'https://img.freepik.com/free-vector/mans-face-flat-style_90220-2877.jpg?t=st=1739902606~exp=1739906206~hmac=f006d7398fc99aefb4b498a15f8a4e3f5e39838cf89965c5777bed88cc806fa7&w=1380';
 
 export const navItems = [
   {
