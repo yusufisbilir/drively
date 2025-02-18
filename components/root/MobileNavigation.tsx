@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu } from 'lucide-react';
+import { Menu, FolderKanban } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { usePathname } from 'next/navigation';
@@ -12,9 +12,9 @@ import {
   Image as LucideImage,
   Video,
   MoreHorizontal,
-  FolderKanban,
 } from 'lucide-react';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 const iconMap = {
   LayoutDashboard,
@@ -28,13 +28,24 @@ interface Props {
   fullName: string;
   avatar: string;
   email: string;
+  className?: string;
 }
 
-const MobileNavigation = ({ fullName, avatar, email }: Props) => {
+const MobileNavigation = ({ fullName, avatar, email, className }: Props) => {
   const pathname = usePathname();
 
   return (
-    <header className="flex h-[60px] items-center border-b border-neutral-200 px-4 sm:hidden">
+    <header
+      className={cn(
+        'flex h-[60px] items-center justify-between border-b border-neutral-200 px-4',
+        className
+      )}
+    >
+      <div className="flex items-center gap-2">
+        <FolderKanban className="h-8 w-8 text-blue-600" />
+        <h1 className="text-xl font-semibold">Drively</h1>
+      </div>
+
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon">

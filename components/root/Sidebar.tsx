@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { avatarPlaceholder, navItems } from '@/constants';
+import { navItems } from '@/constants';
 import {
   LayoutDashboard,
   FileText,
@@ -12,6 +12,7 @@ import {
   FolderKanban,
 } from 'lucide-react';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 const iconMap = {
   LayoutDashboard,
@@ -25,13 +26,19 @@ interface Props {
   fullName: string;
   avatar: string;
   email: string;
+  className?: string;
 }
 
-const Sidebar = ({ fullName, avatar, email }: Props) => {
+const Sidebar = ({ fullName, avatar, email, className }: Props) => {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky left-0 top-0 z-40 flex h-screen w-64 flex-col justify-between border-r border-neutral-200 bg-white px-4 py-5">
+    <aside
+      className={cn(
+        'sticky left-0 top-0 z-40 flex h-screen w-64 flex-col justify-between border-r border-neutral-200 bg-white px-4 py-5',
+        className
+      )}
+    >
       <div>
         <div className="mb-8 flex items-center gap-2">
           <FolderKanban className="h-8 w-8 text-blue-600" />
@@ -67,7 +74,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
       <div className="mt-auto border-t border-neutral-200 pt-4">
         <div className="flex items-center gap-3 rounded-lg p-2 hover:bg-neutral-100">
           <Image
-            src={avatarPlaceholder}
+            src={avatar}
             alt="Avatar"
             width={40}
             height={40}

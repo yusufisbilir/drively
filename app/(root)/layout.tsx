@@ -17,14 +17,16 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         avatar={currentUser.avatar}
         fullName={currentUser.fullName}
         email={currentUser.email}
+        className="hidden md:flex"
       />
       <section className="flex h-full flex-1 flex-col">
         <MobileNavigation
           avatar={currentUser.avatar}
           fullName={currentUser.fullName}
           email={currentUser.email}
+          className="md:hidden"
         />
-        <Header />
+        <Header className="hidden md:flex" />
         <div className="remove-scrollbar h-full flex-1 overflow-auto bg-neutral-50 px-5 py-7">
           {children}
         </div>

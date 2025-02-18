@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn-icons-png.freepik.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'cloud.appwrite.io',
       },
     ],

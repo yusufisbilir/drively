@@ -3,10 +3,20 @@ import { Button } from '../ui/button';
 import { signOutUser } from '@/lib/actions/user.actions';
 import Search from './Search';
 import FileUploader from './FileUploder';
+import { cn } from '@/lib/utils';
 
-const Header = () => {
+interface Props {
+  className?: string;
+}
+
+const Header = ({ className }: Props) => {
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-5 border-b border-neutral-200 bg-white px-5">
+    <header
+      className={cn(
+        'sticky top-0 z-30 flex h-16 items-center justify-between gap-5 border-b border-neutral-200 bg-white px-5',
+        className
+      )}
+    >
       <Search />
       <div className="flex items-center justify-center min-w-fit gap-4">
         <FileUploader />
