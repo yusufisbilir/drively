@@ -19,7 +19,11 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         email={currentUser.email}
       />
       <section className="flex h-full flex-1 flex-col">
-        <MobileNavigation />
+        <MobileNavigation
+          avatar={currentUser.avatar}
+          fullName={currentUser.fullName}
+          email={currentUser.email}
+        />
         <Header />
         <div className="remove-scrollbar h-full flex-1 overflow-auto bg-neutral-50 px-5 py-7">
           {children}
