@@ -1,12 +1,23 @@
 import Header from '@/components/root/Header';
 import MobileNavigation from '@/components/root/MobileNavigation';
 import Sidebar from '@/components/root/Sidebar';
-import { avatarPlaceholder } from '@/constants';
+import { getCurrentUser } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect('/sign-in');
+  }
+
   return (
     <main className="flex h-screen">
-      <Sidebar avatar={avatarPlaceholder} fullName="John Doe" email="john.doe@example.com" />
+      <Sidebar
+        avatar={currentUser.avatar}
+        fullName={currentUser.fullName}
+        email={currentUser.email}
+      />
       <section className="flex h-full flex-1 flex-col">
         <MobileNavigation />
         <Header />
