@@ -18,6 +18,11 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'drop-1': '0px 10px 30px 0px rgba(66, 71, 97, 0.1)',
+        'drop-2': '0 8px 30px 0 rgba(65, 89, 214, 0.3)',
+        'drop-3': '0 8px 30px 0 rgba(65, 89, 214, 0.1)',
+      },
       keyframes: {
         'caret-blink': {
           '0%,70%,100%': { opacity: '1' },
