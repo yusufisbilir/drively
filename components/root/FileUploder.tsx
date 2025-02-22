@@ -59,7 +59,7 @@ const FileUploader = ({ ownerId, userId, className }: FileUploaderProps) => {
       <input {...getInputProps()} />
       <Button type="button" className="bg-blue-600 text-white hover:bg-blue-700 px-4">
         <Upload className="h-5 w-5" />
-        Upload
+        <span className="hidden md:block">Upload</span>
       </Button>
       {files.length > 0 && (
         <ul className="fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-lg bg-white p-4">

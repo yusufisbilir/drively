@@ -25,6 +25,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           avatar={currentUser.avatar}
           fullName={currentUser.fullName}
           email={currentUser.email}
+          ownerId={currentUser.$id}
+          userId={currentUser.id}
           className="md:hidden"
         />
         <Header ownerId={currentUser.$id} userId={currentUser.id} />

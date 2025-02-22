@@ -16,6 +16,7 @@ import {
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { signOutUser } from '@/lib/actions/user.actions';
+import FileUploader from './FileUploder';
 
 const iconMap = {
   LayoutDashboard,
@@ -30,9 +31,11 @@ interface Props {
   avatar: string;
   email: string;
   className?: string;
+  ownerId: string;
+  userId: string;
 }
 
-const MobileNavigation = ({ fullName, avatar, email, className }: Props) => {
+const MobileNavigation = ({ fullName, avatar, email, className, ownerId, userId }: Props) => {
   const pathname = usePathname();
 
   return (
@@ -48,6 +51,7 @@ const MobileNavigation = ({ fullName, avatar, email, className }: Props) => {
       </div>
 
       <div className="flex items-center gap-2">
+        <FileUploader ownerId={ownerId} userId={userId} />
         <form action={async () => await signOutUser()}>
           <Button
             type="submit"
