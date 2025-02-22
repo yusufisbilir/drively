@@ -10,6 +10,12 @@ import {
   Video,
   MoreHorizontal,
   FolderKanban,
+  ImageDownIcon,
+  LucideImages,
+  LucideImageUp,
+  LucideImagePlay,
+  LucideImageMinus,
+  ImageDown,
 } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';

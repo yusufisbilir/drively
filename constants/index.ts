@@ -14,7 +14,7 @@ export const navItems = [
   },
   {
     name: 'Images',
-    icon: 'Image',
+    icon: 'LucideImage',
     url: '/images',
   },
   {
