@@ -32,7 +32,7 @@ interface Props {
   className?: string;
 }
 
-const MobileNavigation = ({ fullName, avatar, email, className }: MobileNavigationProps) => {
+const MobileNavigation = ({ fullName, avatar, email, className }: Props) => {
   const pathname = usePathname();
 
   return (
