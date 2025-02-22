@@ -28,9 +28,9 @@ export const uploadFile = async ({ file, ownerId, userId, path }: UploadFileProp
       extension: getFileType(bucketFile.name).extension,
       size: bucketFile.sizeOriginal,
       owner: ownerId,
-      accountId: userId,
+      userId: userId,
       users: [],
-      bucketFileId: bucketFile.$id,
+      bucketId: bucketFile.$id,
     };
 
     const newFile = await databases

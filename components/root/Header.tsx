@@ -3,23 +3,13 @@ import { Button } from '../ui/button';
 import { signOutUser } from '@/lib/actions/user.actions';
 import Search from './Search';
 import FileUploader from './FileUploder';
-import { cn } from '@/lib/utils';
 
-interface Props {
-  className?: string;
-}
-
-const Header = ({ className }: Props) => {
+const Header = ({ ownerId, userId }: { ownerId: string; userId: string }) => {
   return (
-    <header
-      className={cn(
-        'sticky top-0 z-30 flex h-16 items-center justify-between gap-5 border-b border-neutral-200 bg-white px-5',
-        className
-      )}
-    >
+    <header className="sticky top-0 z-30 h-16 items-center justify-between gap-5 border-b border-neutral-200 bg-white px-5 hidden md:flex">
       <Search />
       <div className="flex items-center justify-center min-w-fit gap-4">
-        <FileUploader />
+        <FileUploader ownerId={ownerId} userId={userId} />
         <form
           action={async () => {
             'use server';

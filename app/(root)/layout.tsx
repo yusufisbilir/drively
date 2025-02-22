@@ -3,6 +3,7 @@ import MobileNavigation from '@/components/root/MobileNavigation';
 import Sidebar from '@/components/root/Sidebar';
 import { getCurrentUser } from '@/lib/actions/user.actions';
 import { redirect } from 'next/navigation';
+import { Toaster } from 'sonner';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const currentUser = await getCurrentUser();
@@ -26,11 +27,12 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           email={currentUser.email}
           className="md:hidden"
         />
-        <Header className="hidden md:flex" />
+        <Header ownerId={currentUser.$id} userId={currentUser.id} />
         <div className="remove-scrollbar h-full flex-1 overflow-auto bg-neutral-50 px-5 py-7">
           {children}
         </div>
       </section>
+      <Toaster />
     </main>
   );
 };

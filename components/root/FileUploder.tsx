@@ -8,15 +8,43 @@ import getFileType from '@/utils/getFileType';
 import Thumbnail from './Thumbnail';
 import { convertFileToUrl } from '@/utils/convertFileToUrl';
 import LoadingSpinner from '../ui/loadingSpinner';
+import { uploadFile } from '@/lib/actions/file.actions';
+import { MAX_FILE_SIZE } from '@/constants';
+import { toast } from 'sonner';
+import { usePathname } from 'next/navigation';
 
 const FileUploader = ({ ownerId, userId, className }: FileUploaderProps) => {
+  const path = usePathname();
   const [files, setFiles] = useState<File[]>([]);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    setFiles(acceptedFiles);
-  }, []);
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      setFiles(acceptedFiles);
+      const uploadPromises = acceptedFiles.map(async (file) => {
+        if (file.size > MAX_FILE_SIZE) {
+          setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name));
+          return toast.error('File too large', {
+            description: (
+              <p>
+                <span className="font-semibold">{file.name}</span> is too large. Max file size is
+                50MB.
+              </p>
+            ),
+          });
+        }
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+        return uploadFile({ file, ownerId, userId, path }).then((uploadedFile) => {
+          if (uploadedFile) {
+            setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name));
+          }
+        });
+      });
+
+      await Promise.all(uploadPromises);
+    },
+    [path, ownerId, userId]
+  );
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const handleRemoveFile = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
