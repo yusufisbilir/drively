@@ -2,19 +2,7 @@ import { cn } from '@/lib/utils';
 import { getFileIcon } from '@/utils/getFileIcon';
 import Image from 'next/image';
 
-const Thumbnail = ({
-  type,
-  extension,
-  url = '',
-  className,
-  imageClassName,
-}: {
-  type: string;
-  extension: string;
-  url?: string;
-  className?: string;
-  imageClassName?: string;
-}) => {
+const Thumbnail = ({ type, extension, url = '', className, imageClassName }: ThumbnailProps) => {
   const isImage = type === 'image' && extension !== 'svg';
 
   return (

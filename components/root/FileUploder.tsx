@@ -9,15 +9,7 @@ import Thumbnail from './Thumbnail';
 import { convertFileToUrl } from '@/utils/convertFileToUrl';
 import LoadingSpinner from '../ui/loadingSpinner';
 
-const FileUploader = ({
-  ownerId,
-  userId,
-  className,
-}: {
-  ownerId: string;
-  userId: string;
-  className?: string;
-}) => {
+const FileUploader = ({ ownerId, userId, className }: FileUploaderProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
