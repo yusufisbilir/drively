@@ -7,7 +7,10 @@ const Thumbnail = ({ type, extension, url = '', className, imageClassName }: Thu
 
   return (
     <figure
-      className={cn(className, 'flex-center size-[50px] min-w-[50px] overflow-hidden rounded-full')}
+      className={cn(
+        className,
+        'flex items-center justify-center size-[50px] min-w-[50px] overflow-hidden rounded-full'
+      )}
     >
       <Image
         src={isImage ? url : getFileIcon(extension, type)}
