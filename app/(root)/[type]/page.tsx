@@ -1,6 +1,7 @@
 import Card from '@/components/root/type/Card';
 import Sort from '@/components/root/type/Sort';
 import { getFiles } from '@/lib/actions/file.actions';
+import convertFileSize from '@/utils/convertFileSize';
 import getFileTypesParams from '@/utils/getFileTypesParams';
 import { Models } from 'node-appwrite';
 
@@ -20,7 +21,12 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
 
         <div className="flex mt-2 flex-col justify-between sm:flex-row sm:items-center">
           <p>
-            Total: <span className="text-base font-semibold">0 MB</span>
+            Total:{' '}
+            <span className="text-base font-semibold">
+              {convertFileSize(
+                files.documents.reduce((acc: number, file: Models.Document) => acc + file.size, 0)
+              )}
+            </span>
           </p>
           <div className="mt-5 flex items-center sm:mt-0 sm:gap-3">
             <p className="hidden text-light-200 sm:block whitespace-nowrap">Sort by:</p>
