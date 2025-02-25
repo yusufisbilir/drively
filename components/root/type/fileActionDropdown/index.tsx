@@ -45,7 +45,6 @@ const iconMap = {
 };
 
 const index = ({ file }: { file: Models.Document }) => {
-  console.log(file);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [action, setAction] = useState<ActionType | null>(null);
