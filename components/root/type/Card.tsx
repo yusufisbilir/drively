@@ -3,7 +3,7 @@ import { Models } from 'node-appwrite';
 import Thumbnail from '../Thumbnail';
 import convertFileSize from '@/utils/convertFileSize';
 import FormattedDateTime from './FormattedDateTime';
-import ActionDropdown from './ActionDropdown';
+import ActionDropdown from './fileActionDropdown';
 
 const Card = ({ file }: { file: Models.Document }) => {
   return (
