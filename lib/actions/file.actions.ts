@@ -107,7 +107,7 @@ export const getFiles = async ({
   }
 };
 
-export const deleteFile = async ({ fileId, bucketFileId, path }: DeleteFileProps) => {
+export const deleteFile = async ({ fileId, bucketId: bucketFileId, path }: DeleteFileProps) => {
   const { databases, storage } = await createAdminClient();
 
   try {
