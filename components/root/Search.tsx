@@ -84,13 +84,10 @@ const Search = () => {
                     url={file.url}
                     className="size-9 min-w-9"
                   />
-                  <p className="subtitle-2 line-clamp-1 text-light-100">{file.name}</p>
+                  <p>{file.name}</p>
                 </div>
 
-                <FormattedDateTime
-                  date={file.$createdAt}
-                  className="caption line-clamp-1 text-light-200"
-                />
+                <FormattedDateTime date={file.$createdAt} />
               </li>
             ))
           ) : (
